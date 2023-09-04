@@ -1,0 +1,110 @@
+.outerCard {
+  width: 100%;
+  padding: 4px;
+  border-radius: 7px;
+  background: #F4F8FF;
+}
+
+.card {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 7px;
+  background-color: #FFF;
+}
+
+.checkbox {
+  margin-left: 0;
+}
+
+.title {
+  overflow: hidden;
+  color: var(--primary-blue, #3D8FEC);
+  max-lines: 3;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3; 
+  -webkit-box-orient: vertical;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+  text-align: left;
+}
+
+.body {
+  width: 100%;
+}
+
+.datesContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%;
+  color:  #50B810;
+}
+
+.description {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #555;
+}
+
+.tagOne {
+  display: flex;
+  padding: 1px 6px 2px 6px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #B233A6;
+  color: #FFF;
+}
+
+.tagTwoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tagTwo {
+  display: flex;
+  padding: 1px 0px 2px 6px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px 0px 0px 4px;
+  background-color: #EBEEF6;
+  color: #616C82;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+}
+
+.avatarContainer {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.avatar {
+  width: 24px;
+  align-self: flex-end;
+}
