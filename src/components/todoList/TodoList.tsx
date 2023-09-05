@@ -20,6 +20,7 @@ export const TodoList = () => {
   useEffect(() => {
     async function getTodos() {
       try {
+        setIsloading(true);
         const responce = await axios.get(
           "https://jsonplaceholder.typicode.com/todos",
           {
@@ -33,16 +34,17 @@ export const TodoList = () => {
         if (error instanceof AxiosError) {
           setError(error.message);
         }
+      } finally {
+        setIsloading(false)
       }
     }
-    getTodos();
+      getTodos();
   }, [page]);
 
   useEffect(() => {
     if (!isFirstRender.current) {
-      if (entry?.isIntersecting) {
+      if (entry?.isIntersecting && !isLoading) {
         setPage((prevPage) => prevPage + 1);
-        setIsloading(true);
       }
     } else {
       isFirstRender.current = false;
@@ -51,6 +53,7 @@ export const TodoList = () => {
 
   if (error) return <div>Error: {error}!</div>;
 
+  console.log(entry)
   return (
     <div className={styles.todoList}>
       <header className={styles.header}>
@@ -60,13 +63,13 @@ export const TodoList = () => {
           <div className={styles.total}>{todos.length}</div>
         </div>
       </header>
-      <body className={styles.body}>
+      <div className={styles.body}>
         {todos.map((todo: ITodo) => (
           <Todo key={todo.id} {...todo} />
         ))}
-      </body>
+      </div>
       {isLoading && <div>Loading...</div>}
-      <div ref={loadMoreRef} style={{ height: "1px" }}></div>
+      <div ref={loadMoreRef} style={{ display: 'flex' }}>...</div>
     </div>
   );
 };
