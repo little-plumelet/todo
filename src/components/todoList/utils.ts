@@ -11,6 +11,6 @@ export function enrichTodos(todos: IPureTodo[]): Array<ITodo> {
     startDate: startDate.toLocaleDateString(undefined, {month: 'short', day: 'numeric'}) + ' ' + startDate.toLocaleTimeString('en-US', { hour: "2-digit", minute: "2-digit" }),
     endDate: endDate.toLocaleDateString(undefined, {month: 'short', day: 'numeric'}) + ' ' + endDate.toLocaleTimeString('en-US', { hour: "2-digit", minute: "2-digit" }),
     tagOne: faker.word.noun(),
-    tagTwo: faker.person.jobTitle()
+    tagTwo: faker.person.jobType()
   }))
 }

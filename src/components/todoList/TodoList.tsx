@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { ITodo } from "../../interfaces/ITodo";
 import { Todo } from "../todo/Todo";
 import { enrichTodos } from "./utils";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 import { useIntersectionObserver } from "usehooks-ts";
 
 export type IPureTodo = Pick<ITodo, "userId" | "id" | "title" | "completed">;
@@ -11,7 +11,7 @@ export const TodoList = () => {
   const [todos, setTodos] = useState<Array<ITodo>>([]);
   const [error, setError] = useState<null | string>(null);
   const [page, setPage] = useState<number>(1);
-  
+  const [isLoading, setIsloading] = useState(false);
 
   const loadMoreRef = useRef(null);
   const isFirstRender = useRef(true);
@@ -27,8 +27,8 @@ export const TodoList = () => {
           }
         );
         const enrichedTodos = enrichTodos(responce?.data as IPureTodo[]);
-        console.log('request done')
         setTodos((prevTodos) => [...prevTodos, ...enrichedTodos]);
+        setIsloading(false);
       } catch (error: unknown) {
         if (error instanceof AxiosError) {
           setError(error.message);
@@ -36,13 +36,13 @@ export const TodoList = () => {
       }
     }
     getTodos();
-    console.log('request sent')
   }, [page]);
 
   useEffect(() => {
     if (!isFirstRender.current) {
       if (entry?.isIntersecting) {
         setPage((prevPage) => prevPage + 1);
+        setIsloading(true);
       }
     } else {
       isFirstRender.current = false;
@@ -56,15 +56,19 @@ export const TodoList = () => {
       <header className={styles.header}>
         <div className={styles.title}>Today</div>
         <div className={styles.actionContainer}>
-          
           <button className={styles.plus}>+</button>
           <div className={styles.total}>{todos.length}</div>
         </div>
       </header>
-      {todos.map((todo: ITodo) => (
-        <Todo key={todo.id} {...todo}/>
-      ))}
-     <div ref={loadMoreRef} style={{height: '1px'}}></div>
+      {todos.length && (
+        <>
+          {todos.map((todo: ITodo) => (
+            <Todo key={todo.id} {...todo} />
+          ))}
+          {isLoading && <div>Loading...</div>}
+          <div ref={loadMoreRef} style={{ height: "1px" }}></div>
+        </>
+      )}
     </div>
   );
 };
