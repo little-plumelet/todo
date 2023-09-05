@@ -60,15 +60,13 @@ export const TodoList = () => {
           <div className={styles.total}>{todos.length}</div>
         </div>
       </header>
-      {todos.length && (
-        <>
-          {todos.map((todo: ITodo) => (
-            <Todo key={todo.id} {...todo} />
-          ))}
-          {isLoading && <div>Loading...</div>}
-          <div ref={loadMoreRef} style={{ height: "1px" }}></div>
-        </>
-      )}
+      <body className={styles.body}>
+        {todos.map((todo: ITodo) => (
+          <Todo key={todo.id} {...todo} />
+        ))}
+      </body>
+      {isLoading && <div>Loading...</div>}
+      <div ref={loadMoreRef} style={{ height: "1px" }}></div>
     </div>
   );
 };
