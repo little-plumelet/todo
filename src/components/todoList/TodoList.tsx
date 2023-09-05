@@ -27,7 +27,7 @@ export const TodoList = () => {
           }
         );
         const enrichedTodos = enrichTodos(responce?.data as IPureTodo[]);
-        
+        console.log('request done')
         setTodos((prevTodos) => [...prevTodos, ...enrichedTodos]);
       } catch (error: unknown) {
         if (error instanceof AxiosError) {
@@ -36,6 +36,7 @@ export const TodoList = () => {
       }
     }
     getTodos();
+    console.log('request sent')
   }, [page]);
 
   useEffect(() => {
