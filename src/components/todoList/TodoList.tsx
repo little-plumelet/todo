@@ -35,10 +35,10 @@ export const TodoList = () => {
           setError(error.message);
         }
       } finally {
-        setIsloading(false)
+        setIsloading(false);
       }
     }
-      getTodos();
+    getTodos();
   }, [page]);
 
   useEffect(() => {
@@ -53,7 +53,6 @@ export const TodoList = () => {
 
   if (error) return <div>Error: {error}!</div>;
 
-  console.log(entry)
   return (
     <div className={styles.todoList}>
       <header className={styles.header}>
@@ -69,7 +68,9 @@ export const TodoList = () => {
         ))}
       </div>
       {isLoading && <div>Loading...</div>}
-      <div ref={loadMoreRef} style={{ display: 'flex' }}>...</div>
+      <div ref={loadMoreRef} style={{ display: "flex" }}>
+        ...
+      </div>
     </div>
   );
 };
