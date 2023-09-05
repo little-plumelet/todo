@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
 import avatar from "../../assets/avatar.png";
 import { ITodo } from "../../interfaces/ITodo";
+import { useState } from "react";
 
 export const Todo: React.FC<ITodo> = ({
   title,
@@ -11,6 +12,7 @@ export const Todo: React.FC<ITodo> = ({
   tagOne,
   tagTwo,
 }: ITodo) => {
+  const [checked, setChecked] = useState(completed);
   return (
     <div className={styles.outerCard}>
       <div className={styles.card}>
@@ -18,8 +20,9 @@ export const Todo: React.FC<ITodo> = ({
           <p className={styles.title}>
             <input
               type="checkbox"
-              checked={completed}
+              checked={checked}
               className={styles.checkbox}
+              onClick={() => setChecked((prev) => !prev)}
             />
             {title}
           </p>
