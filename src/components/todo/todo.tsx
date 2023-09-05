@@ -22,7 +22,7 @@ export const Todo: React.FC<ITodo> = ({
               type="checkbox"
               checked={checked}
               className={styles.checkbox}
-              onClick={() => setChecked((prev) => !prev)}
+              onChange={() => setChecked((prev) => !prev)}
             />
             {title}
           </p>

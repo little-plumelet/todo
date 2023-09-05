@@ -1,14 +1,21 @@
 import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ITodo } from "../../interfaces/ITodo";
 import { Todo } from "../todo/Todo";
 import { enrichTodos } from "./utils";
 import styles from './styles.module.css';
+import { useIntersectionObserver } from "usehooks-ts";
 
 export type IPureTodo = Pick<ITodo, "userId" | "id" | "title" | "completed">;
 export const TodoList = () => {
   const [todos, setTodos] = useState<Array<ITodo>>([]);
   const [error, setError] = useState<null | string>(null);
+  const [page, setPage] = useState<number>(1);
+  
+
+  const loadMoreRef = useRef(null);
+  const isFirstRender = useRef(true);
+  const entry = useIntersectionObserver(loadMoreRef, {});
 
   useEffect(() => {
     async function getTodos() {
@@ -16,11 +23,12 @@ export const TodoList = () => {
         const responce = await axios.get(
           "https://jsonplaceholder.typicode.com/todos",
           {
-            params: { _page: 1 },
+            params: { _page: page },
           }
         );
         const enrichedTodos = enrichTodos(responce?.data as IPureTodo[]);
-        setTodos(enrichedTodos);
+        
+        setTodos((prevTodos) => [...prevTodos, ...enrichedTodos]);
       } catch (error: unknown) {
         if (error instanceof AxiosError) {
           setError(error.message);
@@ -28,7 +36,17 @@ export const TodoList = () => {
       }
     }
     getTodos();
-  }, []);
+  }, [page]);
+
+  useEffect(() => {
+    if (!isFirstRender.current) {
+      if (entry?.isIntersecting) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    } else {
+      isFirstRender.current = false;
+    }
+  }, [entry]);
 
   if (error) return <div>Error: {error}!</div>;
 
@@ -43,8 +61,9 @@ export const TodoList = () => {
         </div>
       </header>
       {todos.map((todo: ITodo) => (
-        <Todo key={todo.userId} {...todo}/>
+        <Todo key={todo.id} {...todo}/>
       ))}
+     <div ref={loadMoreRef} style={{height: '1px'}}></div>
     </div>
   );
 };
