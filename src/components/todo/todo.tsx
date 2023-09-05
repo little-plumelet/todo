@@ -1,16 +1,6 @@
 import styles from "./styles.module.css";
 import avatar from "../../assets/avatar.png";
-
-export interface ITodo {
-  userId: number;
-  title: string;
-  completed: boolean;
-  description: string;
-  startDate: string;
-  endDate: string;
-  tagOne: string;
-  tagTwo: string;
-}
+import { ITodo } from "../../interfaces/ITodo";
 
 export const Todo: React.FC<ITodo> = ({
   title,

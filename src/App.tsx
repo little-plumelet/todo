@@ -1,5 +1,6 @@
 import './App.css'
-import { ITodo, Todo } from './components/todo/todo'
+import { ITodo, Todo } from './components/todo/Todo'
+import { TodoList } from './components/todoList/TodoList'
 
 const mockData: ITodo = { 
   "userId": 1,
@@ -15,7 +16,7 @@ const mockData: ITodo = {
 function App() {
   return (
     <div style={{width: '400px'}}>
-      <Todo {...mockData}/>
+      <TodoList />
     </div>
   )
 }

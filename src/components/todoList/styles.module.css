@@ -1,0 +1,61 @@
+.todoList {
+  height: 600px;
+  overflow: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.header {
+  width: 100%;
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #FFF;
+}
+
+.title {
+  flex-grow: 1;
+  color: #50B810;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%; 
+}
+
+.actionContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.plus {
+  min-width: 20px;
+  padding: 1px 6px 2px 6px;
+  background-color: #EBEEF6;
+  color: #3D8FEC;
+  font-weight: bold;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+}
+
+.total {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%;
+  color: #555;
+  border: 1px solid  #7B8AAB;
+  border-radius: 4px;
+  padding: 1px 6px 2px 6px;
+}
